@@ -12,8 +12,10 @@ public class FlickeringLabel extends JLabel implements Runnable {
 		super(str);
 		
 		this.time = time;
-		this.setBackground(Color.yellow);
-		this.setFont(new Font("Gordic", Font.ITALIC, 80));
+		this.setOpaque(true); //배경색을 변경 가능하게 설정.. //Opaque: 불투명체
+		
+		Thread thread = new Thread(this);
+		thread.start();
 	}
 	
 	@Override

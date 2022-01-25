@@ -1,14 +1,18 @@
 package example3;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class FlickeringLabelEx extends JFrame {
+	private JLabel[] labels;
+	
 	public FlickeringLabelEx() {
 		super("FlickeringLabelEx ¿¹Á¦");
 		
+		labels = new JLabel[3];
 		buildGUI();
 		
 		this.setSize(300, 200);
@@ -18,11 +22,13 @@ public class FlickeringLabelEx extends JFrame {
 	}
 	
 	private void buildGUI() {
-		FlickeringLabel label = new FlickeringLabel("±ô¹Ú ±ô¹Ú", 1);
-		Thread thread = new Thread(label);
-		this.add(label);
+		labels[0] = new FlickeringLabel("±ô¹Ú", 1); //±ô¹ÚÀÌ´Â ·¹ÀÌºí
+		labels[1] = new JLabel(" ¾È±ô¹Ú ");
+		labels[2] = new FlickeringLabel("¿©±âµµ ±ô¹Ú", 2); //±ô¹ÚÀÌ´Â ·¹ÀÌºí
 		
-		thread.start();
-		
+		for(JLabel label : labels) {
+			label.setFont(new Font("Gordic", Font.ITALIC, 20));
+			this.add(label);
+		}
 	}
 }
