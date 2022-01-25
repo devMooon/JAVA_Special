@@ -35,6 +35,7 @@ public class ThreadTimeEx extends JFrame {
 	}
 	
 	public class TimeThread extends Thread {
+		//내부클래스로 만들지 않고 생성자의 인수로 label을 넘겨받기
 		public int num = 0;
 		
 		@Override
@@ -42,7 +43,7 @@ public class ThreadTimeEx extends JFrame {
 			
 			while(true) {
 				num += 1;
-				number.setText(num + " ");
+				number.setText(num + " "); //Integer.toString(num);
 				
 				try {
 					sleep(1000);
