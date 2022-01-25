@@ -1,4 +1,4 @@
-package ex;
+package practice1;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ class CountRunnable implements Runnable {
 }
 
 
-public class Ex1 {
+public class Count {
 	static private Thread thread;
 	
 	public static void main(String[] args) {
