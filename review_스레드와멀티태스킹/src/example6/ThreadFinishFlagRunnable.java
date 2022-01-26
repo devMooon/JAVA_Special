@@ -16,7 +16,7 @@ public class ThreadFinishFlagRunnable implements Runnable {
 	public ThreadFinishFlagRunnable(JFrame frame) {
 		this.frame = frame;
 	}
-	static public void finish() { 
+	public void finish() { 
 		flag = false; 
 	}
 	
