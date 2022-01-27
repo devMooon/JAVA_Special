@@ -1,7 +1,5 @@
 package practice4;
 
-import java.awt.Point;
-
 import javax.swing.JFrame;
 
 public class WavingFrame extends JFrame {
