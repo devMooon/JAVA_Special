@@ -2,8 +2,6 @@ package practice2;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
@@ -12,8 +10,7 @@ public class MyPanel extends JPanel {
 	int y;
 	
 	public MyPanel() {
-		this.setSize(500, 500);
-		Thread th = new DrawThread(x, y, this);
+		Thread th = new DrawThread(this);
 		th.start();
 	}
 	
@@ -30,6 +27,6 @@ public class MyPanel extends JPanel {
 		super.paintComponent(g);
 		
 		g.setColor(Color.BLUE);
-		g.drawOval(x, y, 50, 50);		
+		g.drawOval(x, y, 50, 50);
 	}
 }

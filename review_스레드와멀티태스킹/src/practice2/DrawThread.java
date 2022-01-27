@@ -1,15 +1,11 @@
 package practice2;
 
-import javax.swing.JPanel;
-
 public class DrawThread extends Thread {
 	private int x;
 	private int y;
 	private MyPanel panel;
 	
-	public DrawThread(int x, int y, MyPanel panel) {
-		this.x = x;
-		this.y = y;
+	public DrawThread(MyPanel panel) {
 		this.panel = panel;
 	}
 
@@ -23,8 +19,11 @@ public class DrawThread extends Thread {
 				e.printStackTrace();
 			}
 			
-			panel.setXY((int)Math.random()*500, (int)Math.random()*500);
-			panel.repaint();
+			x = ((int)(Math.random()*panel.getWidth()));
+			y = ((int)(Math.random()*panel.getHeight()));
+			
+			panel.setXY(x, y);
+			
 		}
 	}
 	

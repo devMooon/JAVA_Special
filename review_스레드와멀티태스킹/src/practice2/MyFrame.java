@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MyFrame extends JFrame {
-	private JPanel panel = new MyPanel();
+	private JPanel panel;
 	
 	public MyFrame() {
 		super("원을 0.5초 간격으로 이동");
@@ -16,6 +16,7 @@ public class MyFrame extends JFrame {
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
+				panel = new MyPanel();
 				MyFrame.this.setContentPane(panel);
 				
 				revalidate();
