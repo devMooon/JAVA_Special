@@ -10,18 +10,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class ShootingGame extends JFrame {
-	public boolean active = false;
 	private JLabel ghostLabel;
 	private JLabel bulletLabel;
+	private GhostThread ghostThread;
+	private Thread bulletThread = null;
 	
 	public ShootingGame() {
 		super("Shooting Game");
 		
 		this.setLayout(null);
-		registerListener();
-		
 		buildGUI();
 		buildGhostThread();
+		registerListener();
 		
 		this.setSize(500, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -36,14 +36,10 @@ public class ShootingGame extends JFrame {
 				super.keyPressed(e);
 				
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
-					if(!active) {
-						active = true;
-						Thread thread = new BulletThread(bulletLabel);
-						thread.start();
-						
-						//한번에 하나씩만 발사 가능
-						//만약 고스트에 닿았거나 위쪽 끝에 닿았을 경우 처음 위치로 돌아가서 스레드 정지
-						thread.interrupt();
+					
+					if(bulletThread == null || !bulletThread.isAlive()) {
+						bulletThread = new BulletThread(bulletLabel, ghostLabel, ghostThread);
+						bulletThread.start();
 					}
 				}
 			}
@@ -90,7 +86,7 @@ public class ShootingGame extends JFrame {
 	
 	private void buildGhostThread() {
 		//계속 왼쪽으로 20ms당 5픽셀식 이동, 왼쪽 끝에 닿으면 다시 오른쪽 끝에서 등장
-		Thread thread = new GhostThread(ghostLabel);
-		thread.start();
+		ghostThread = new GhostThread(ghostLabel);
+		ghostThread.start();
 	}
 }
