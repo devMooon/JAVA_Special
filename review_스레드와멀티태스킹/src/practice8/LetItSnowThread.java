@@ -1,14 +1,19 @@
 package practice8;
 
-import javax.swing.JComponent;
+import java.awt.Point;
+import java.util.Iterator;
+import java.util.Vector;
+
+import javax.swing.JFrame;
 
 public class LetItSnowThread extends Thread {
-	private Snow snow;
-	private int x;
+	private Vector<Point> snowPoints;
+	private JFrame frame;
 	private int y;
 	
-	public LetItSnowThread(Snow snow) {
-		this.snow = snow;
+	public LetItSnowThread(Vector<Point> snowPoints, JFrame frame) {
+		this.snowPoints = snowPoints;
+		this.frame = frame;
 	}
 
 	@Override
@@ -17,20 +22,26 @@ public class LetItSnowThread extends Thread {
 		super.run();
 		
 		while(true) {
-			
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			Iterator<Point> itr = snowPoints.iterator();
+			while(itr.hasNext()) {
+				Point point = itr.next();
+				y=point.y;
+				y+=5;
+				
+				if(y >= frame.getHeight()) y=0;
+				
+				point.y = y;
+				frame.repaint();
+				
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
-			y = snow.getY();
-			System.out.println(y);
 			
-			if(y >= snow.getParent().getHeight()) y = 0;
-			y++;
-			snow.setLocation(snow.getParent().getX(), y);
 		}
 		
 	}
